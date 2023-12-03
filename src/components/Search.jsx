@@ -77,7 +77,7 @@ const Search = ({ hide }) => {
           <Button type="submit" variant="outlined">
             Google search
           </Button>
-          <Button variant="outlined">I am feeling lucky</Button>
+          <a href="https://doodles.google/"><Button variant="outlined">I am feeling lucky</Button></a>
         </SearchButton>
       )}
     </form>
