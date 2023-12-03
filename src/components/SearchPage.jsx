@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,6 +9,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import styled from "styled-components";
 import Loader from "./Loader";
+import { DataContext } from "./DataContext";
 
 const SearchPageHeader = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ const SearchPageHeader = styled.div`
   top: 0;
   z-index: 100;
   background-color: white;
-  align-items: felx-start;
+  align-items: flex-start;
   padding: 30px;
   border-bottom: 1px solid lightgray;
   img {
@@ -98,7 +99,9 @@ const SearchPageResultDesc = styled.p`
   margin-top: 10px;
 `;
 
-const SearchPage = ({data}) => {
+const SearchPage = () => {
+
+const { data } = useContext(DataContext);
 
 console.log(data)
 
@@ -152,7 +155,7 @@ console.log(data)
         </div>
       </SearchPageHeader>
 
-      {data && (
+      {data ? (
         <SearchPageResults>
           <p className="resultCount">
             About {data?.searchInformation?.formattedTotalResults} results (
@@ -177,9 +180,9 @@ console.log(data)
             </div>
           ))}
         </SearchPageResults>
-      )}
+      ) : <Loader />}
 
-    {!data ? <Loader /> : data}
+    {/* {!data ? <Loader /> : data} */}
 
     </div>
   );
