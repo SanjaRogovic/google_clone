@@ -12,7 +12,7 @@ const HomeContainer = styled.div`
 
 const HeaderContainer = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     padding: 20px 30px;
     align-items: center;
 `;
@@ -48,10 +48,10 @@ const Home = () => {
   return (
     <HomeContainer>
         <HeaderContainer>
-            <Header>
+            {/* <Header>
                 <p>About</p>
                 <p>Store</p>
-            </Header>
+            </Header> */}
             <Header>
                 <p>Gmail</p>
                 <p>Images</p>
