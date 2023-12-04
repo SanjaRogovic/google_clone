@@ -15,17 +15,32 @@ const HeaderContainer = styled.div`
   justify-content: flex-end;
   padding: 20px 30px;
   align-items: center;
+
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    justify-content: flex-end;
+  }
 `;
 
 const Header = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
+  align-self: flex-end;
   p {
     margin-right: 20px;
     font-size: 15px;
+    padding: 2px;
   }
   .left-margin {
     margin-left: 20px;
+  }
+
+  @media screen and (max-width: 768px) {
+    flex-direction: row;
+    align-items: flex-end;
+    p {
+      margin: 5px 0;
+    }
   }
 `;
 
@@ -37,7 +52,12 @@ const BodyContainer = styled.div`
   img {
     object-fit: contain;
     height: 100px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
+
+    @media screen and (max-width: 768px) {
+      height: 80px;
+      margin-bottom: 5px;
+    }
   }
 `;
 

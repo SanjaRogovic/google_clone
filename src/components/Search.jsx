@@ -11,8 +11,8 @@ const SearchInput = styled.div`
   align-items: center;
   border: 1px solid lightgray;
   height: 30px;
-  padding: 10px 15px;
-  width: 500px;
+  padding: 10px;
+  max-width: 500px; 
   margin: 0px auto;
   border-radius: 999px;
   input {
@@ -24,6 +24,21 @@ const SearchInput = styled.div`
   }
   .searchicon {
     color: gray;
+    font-size: 20px;
+
+    @media screen and (max-width: 600px) {
+      font-size: 16px; 
+    }
+  }
+
+  }
+
+  @media screen and (max-width: 600px) {
+    max-width: 50%;
+    padding: 4px;
+    input {
+      padding: 0px 2px;
+    }
   }
 `;
 
@@ -31,11 +46,13 @@ const SearchButton = styled.div`
   margin-top: 20px;
   display: flex;
   justify-content: center;
+
   button {
     margin: 5px;
     background: #f8f8f8 !important;
     border: 1px solid white;
     text-transform: inherit;
+
     &:hover {
       margin: 5px;
       background: #f8f8f8 !important;
