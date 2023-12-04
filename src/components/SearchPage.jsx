@@ -1,4 +1,4 @@
-import React, {useState, useContext} from "react";
+import React, { useContext } from "react";
 import Search from "./Search";
 import { Link } from "react-router-dom";
 import SearchIcon from "@mui/icons-material/Search";
@@ -9,7 +9,7 @@ import RoomIcon from "@mui/icons-material/Room";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import styled from "styled-components";
 import Loader from "./Loader";
-import { DataContext } from "./DataContext";
+import { DataContext } from "../context/DataContext";
 
 const SearchPageHeader = styled.div`
   display: flex;
@@ -37,7 +37,6 @@ const SearchPageOptions = styled.div`
     margin-left: 5px;
   }
 `;
-
 
 const OptionsLeft = styled.div`
   margin-left: 0px;
@@ -100,10 +99,9 @@ const SearchPageResultDesc = styled.p`
 `;
 
 const SearchPage = () => {
+  const { data } = useContext(DataContext);
 
-const { data } = useContext(DataContext);
-
-console.log(data)
+  console.log(data);
 
   return (
     <div>
@@ -155,35 +153,44 @@ console.log(data)
         </div>
       </SearchPageHeader>
 
-      {data ? (
-        <SearchPageResults>
-          <p className="resultCount">
-            About {data?.searchInformation?.formattedTotalResults} results (
-            {data?.searchInformation?.formattedSearchTime} ) for {data}
-          </p>
+      {data && data.items && data.items.length ? (
+        data.items.map((item, index) => (
+          <SearchPageResults key={index}>
+            <p className="resultCount">
+              About {data?.searchInformation?.formattedTotalResults} results (
+              {data?.searchInformation?.formattedSearchTime}) for{" "}
+              {data?.queries?.request && data.queries.request[0]?.searchTerms}
+            </p>
 
-          {data?.items?.map((item) => (
             <div className="result">
-              <SearchPageLink href={item.link}>
-
-                {item.pagemap?.cse_image?.length > 0 && item.pagemap?.cse_image[0]?.src && (
-                    <img src={item.pagemap?.cse_image[0]?.src} alt="search" />
-                )}
-                
-                {item.displayLink}
-
+              <SearchPageLink href={item?.link} target="_blank">
+                <img
+                  src={
+                    item?.pagemap?.cse_image && item.pagemap.cse_image[0]?.src
+                  }
+                  alt={item?.title}
+                />
+                {item?.displayLink}
               </SearchPageLink>
-              <SearchPageResultTitle href={item.link}>
-                <h2>{item.htmlTitle}</h2>
+              <SearchPageResultTitle href={item?.link}>
+                <h2>{item?.title}</h2>
               </SearchPageResultTitle>
-              <SearchPageResultDesc>{item.htmlSnippet}</SearchPageResultDesc>
+              <SearchPageResultDesc>{item?.snippet}</SearchPageResultDesc>
             </div>
-          ))}
-        </SearchPageResults>
-      ) : <Loader />}
-
-    {/* {!data ? <Loader /> : data} */}
-
+          </SearchPageResults>
+        ))
+      ) : (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            minHeight: "100vh",
+          }}
+        >
+          <Loader />
+        </div>
+      )}
     </div>
   );
 };

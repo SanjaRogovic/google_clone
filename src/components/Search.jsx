@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import MicIcon from "@mui/icons-material/Mic";
 import Button from "@mui/material/Button";
 import SearchIcon from "@mui/icons-material/Search";
 import styled from "styled-components";
-import axios from "axios";
-import { DataContext } from "./DataContext";
+import { DataContext } from "../context/DataContext";
 
 const SearchInput = styled.div`
   display: flex;
@@ -47,7 +46,6 @@ const SearchButton = styled.div`
 `;
 
 const Search = ({ hide }) => {
-
   const { searchTerm, setSearchTerm, getResults } = useContext(DataContext);
 
   const navigate = useNavigate();
@@ -56,13 +54,11 @@ const Search = ({ hide }) => {
     setSearchTerm(e.target.value);
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await getResults()
+    await getResults();
     navigate("/search");
   };
- 
 
   return (
     <form onSubmit={handleSubmit}>
@@ -77,7 +73,9 @@ const Search = ({ hide }) => {
           <Button type="submit" variant="outlined">
             Google search
           </Button>
-          <a href="https://doodles.google/"><Button variant="outlined">I am feeling lucky</Button></a>
+          <a href="https://doodles.google/">
+            <Button variant="outlined">I am feeling lucky</Button>
+          </a>
         </SearchButton>
       )}
     </form>

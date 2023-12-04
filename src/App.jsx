@@ -1,12 +1,9 @@
-import React from 'react'
-import Home from './components/Home'
-import SearchPage from './components/SearchPage'
-import { Routes, Route } from 'react-router-dom'
-
-
+import React from "react";
+import Home from "./components/Home";
+import SearchPage from "./components/SearchPage";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
-
   return (
     <>
       <Routes>
@@ -17,4 +14,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
